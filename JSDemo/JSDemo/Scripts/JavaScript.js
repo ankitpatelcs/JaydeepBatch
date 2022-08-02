@@ -1,0 +1,1 @@
+﻿function callme() { var txtdata = document.getElementById("txt").value; alert(txtdata); }
