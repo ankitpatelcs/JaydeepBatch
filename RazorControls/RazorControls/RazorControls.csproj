@@ -164,6 +164,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Docs\Screenshot %281%29.png" />
+    <Content Include="Docs\Screenshot %286%29.png" />
+    <Content Include="Docs\Screenshot %287%29.png" />
     <Content Include="EDM\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

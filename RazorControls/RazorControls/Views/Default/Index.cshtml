@@ -50,7 +50,7 @@
         <th>
             @Html.DisplayNameFor(model => model.profileimg)
         </th>
-        <th></th>
+        
     </tr>
 
 @foreach (var item in Model) {
@@ -83,22 +83,18 @@
             @Html.DisplayFor(modelItem => item.gender)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.state_id)
+            @Html.DisplayFor(modelItem => item.tblstate.state_name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.city_id)
+            @Html.DisplayFor(modelItem => item.tblcity.city_name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.hobbies)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.profileimg)
+            <img src="~/Docs/@item.profileimg" height="80" width="100" />
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit","Default", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+        
     </tr>
 }
 

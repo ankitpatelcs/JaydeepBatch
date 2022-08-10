@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace RazorControls.Controllers
         // GET: Default
         public ActionResult Index()
         {
-            return View();
+            return View(dc.tblemployees.ToList());
         }
 
         void FillStates()
@@ -41,8 +42,33 @@ namespace RazorControls.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(tblemployee obj)
+        public ActionResult Create(tblemployee obj,FormCollection fc,HttpPostedFileBase file)
         {
+            bool Reading = Convert.ToBoolean(fc["Reading"].Split(',')[0]);
+            bool Playing = Convert.ToBoolean(fc["Playing"].Split(',')[0]);
+            bool Swimming = Convert.ToBoolean(fc["Swimming"].Split(',')[0]);
+            string hoby = "";
+            if (Reading)
+            {
+                hoby += "Reading,";
+            }
+            if (Playing)
+            {
+                hoby += "Playing,";
+            }
+            if (Swimming)
+            {
+                hoby += "Swimming";
+            }
+            obj.hobbies = hoby;
+
+            if (file != null)
+            {
+                string filename = Path.GetFileName(file.FileName);
+                string fullpath = Path.Combine(Server.MapPath("~/Docs"),filename);
+                file.SaveAs(fullpath);
+                obj.profileimg = filename;
+            }
 
             dc.tblemployees.Add(obj);
             dc.SaveChanges();
