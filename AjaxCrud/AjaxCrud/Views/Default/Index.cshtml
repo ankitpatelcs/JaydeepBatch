@@ -18,6 +18,7 @@
                         + "<td>" + item.email + "</td>"
                         + "<td>" + item.mobile + "</td>"
                         + "<td>" + item.gender + "</td>"
+                        + "<td><a href='/Default/Edit/" + item.emp_id + "'>Edit</a> | <a href='/Default/Delete/" + item.emp_id + "'>Delete</a></td>"
                         + "</tr>");
                 });
             }
@@ -26,7 +27,9 @@
 </script>
 
 <h2>Index</h2>
-
+<p>
+    <a href="/Default/Create">Create New</a>
+</p>
 <table class="table" id="tbl">
     <tr>
         <th>Employee ID</th>
