@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AjaxCrud.EDM;
 
-namespace AjaxCrud.Controllers 
+namespace AjaxCrud.Controllers
 {
     public class DefaultController : Controller
     {
@@ -22,8 +22,27 @@ namespace AjaxCrud.Controllers
             return Json(dc.tblemployees.ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        void FillState()
+        {
+            var data = from s in dc.tblstates
+                       select new SelectListItem
+                       {
+                           Text = s.state_name,
+                           Value = s.state_id.ToString()
+                       };
+
+            ViewBag.states = data.ToList();
+        }
+
+        public JsonResult GetCitiesByStateId(int id)
+        {
+            dc.Configuration.ProxyCreationEnabled = false;
+            return Json(dc.tblcities.Where(x => x.state_id == id).ToList(),JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Create()
         {
+            FillState();
             return View();
         }
         [HttpPost]
