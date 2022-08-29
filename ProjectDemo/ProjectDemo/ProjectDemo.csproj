@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\MasterController.cs" />
+    <Compile Include="Areas\Users\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EDM\Model1.Context.cs">
@@ -396,6 +397,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Products\a53.jpg" />
+    <Content Include="Images\Products\ipad_air.jpg" />
+    <Content Include="Images\Products\iPhone12.jfif" />
+    <Content Include="Images\Products\iPhone_blue.jfif" />
+    <Content Include="Images\Products\laptop.jpg" />
+    <Content Include="Images\Products\macbookpro.jpg" />
+    <Content Include="Images\Products\nord_CE_2.jpg" />
+    <Content Include="Images\Products\oneplus9.jpg" />
+    <Content Include="Images\Products\Oppo_Reno_6_pro.jpg" />
+    <Content Include="Images\Products\pavillion15.jpg" />
+    <Content Include="Images\Products\s21.jpg" />
+    <Content Include="Images\Products\tab_a7.png" />
+    <Content Include="Images\Products\xps13.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -428,6 +442,11 @@
     <Content Include="Areas\Admin\Views\Shared\Admin_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Master\Dashboard.cshtml" />
     <Content Include="Areas\Admin\Views\Master\Login.cshtml" />
+    <Content Include="Areas\Users\Views\Shared\User_Layout.cshtml" />
+    <Content Include="Areas\Users\Views\Default\HomePage.cshtml" />
+    <Content Include="Areas\Users\Views\Default\Login.cshtml" />
+    <Content Include="Areas\Users\Views\Default\Register.cshtml" />
+    <Content Include="Areas\Users\Views\Default\Products.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -457,9 +476,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Users\Controllers\" />
     <Folder Include="Areas\Users\Data\" />
-    <Folder Include="Areas\Users\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
