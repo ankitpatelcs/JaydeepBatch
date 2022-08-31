@@ -15,13 +15,15 @@
                     <div class="col-md-3 top_brand_left" style="margin-bottom:50px">
                         <div class="hover14 column">
                             <div class="agile_top_brand_left_grid">
-                                <div class="agile_top_brand_left_grid_pos">                                    
+                                <div class="agile_top_brand_left_grid_pos">
                                 </div>
                                 <div class="agile_top_brand_left_grid1">
                                     <figure>
                                         <div class="snipcart-item block">
                                             <div class="snipcart-thumb">
-                                                <a href="single.html"><img title=" " alt=" " src="~/Images/Products/@item.image1" width="200" height="200"></a>
+                                                <a href="/Users/Default/Single/@item.product_id">
+                                                    <img title=" " alt=" " src="~/Images/Products/@item.image1" width="200" height="200">
+                                                </a>
                                                 <p>@item.product_name</p>
                                                 <h4>₹ @(item.cost-(item.cost*item.discount/100)) <span>₹ @item.cost</span></h4>
                                             </div>
@@ -39,7 +41,7 @@
                                                         <input type="hidden" name="return" value=" ">
                                                         <input type="hidden" name="cancel_return" value=" ">
                                                         <input type="submit" name="submit" value="Add to cart"
-                                                               class="button">
+                                                               class="button" onclick="addToCart(@item.product_id)">
                                                     </fieldset>
                                                 </form>
                                             </div>
@@ -56,4 +58,18 @@
         <div class="clearfix"> </div>
     </div>
 </div>
+<script>
+    function addToCart(pid) {
+        $.ajax({
+            url: "/Users/Default/AddToCart",
+            type: "GET",
+            data: { id: pid },
+            dataType: "text",
+            success: function (msg) {
+                alert(msg);
+                window.location.href = "/Users/Default/Products";
+            }
+        });
+    }
+</script>
 <!--- products --->

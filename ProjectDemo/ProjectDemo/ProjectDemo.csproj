@@ -447,6 +447,7 @@
     <Content Include="Areas\Users\Views\Default\Login.cshtml" />
     <Content Include="Areas\Users\Views\Default\Register.cshtml" />
     <Content Include="Areas\Users\Views\Default\Products.cshtml" />
+    <Content Include="Areas\Users\Views\Default\Single.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
