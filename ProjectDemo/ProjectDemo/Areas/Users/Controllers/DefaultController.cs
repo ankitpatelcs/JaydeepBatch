@@ -62,15 +62,49 @@ namespace ProjectDemo.Areas.Users.Controllers
         public string AddToCart(int id)
         {
             int userid = Convert.ToInt32(Session["UserId"].ToString());
-            tblcart obj = new tblcart();
-            obj.product_id = id;
-            obj.qty = 1;
-            obj.user_id = userid;
 
-            dc.tblcarts.Add(obj);
-            dc.SaveChanges();
+            var cartobj = dc.tblcarts.Where(c => c.product_id == id && c.user_id == userid).FirstOrDefault();
+            if (cartobj == null)
+            {
+                tblcart obj = new tblcart();
+                obj.product_id = id;
+                obj.qty = 1;
+                obj.user_id = userid;
+
+                dc.tblcarts.Add(obj);
+                dc.SaveChanges();
+            }
+            else
+            {
+                cartobj.qty += 1;
+                dc.Entry(cartobj).State = System.Data.Entity.EntityState.Modified;
+                dc.SaveChanges();
+            }
 
             return "Product added to cart.";
+        }
+
+        public ActionResult Cart()
+        {
+            int userid = Convert.ToInt32(Session["UserId"].ToString());
+            return View(dc.tblcarts.Where(c=>c.user_id==userid).ToList());
+        }
+        public ActionResult Delete(int id)
+        {
+            dc.tblcarts.Remove(dc.tblcarts.Find(id));
+            dc.SaveChanges();
+            return RedirectToAction("Cart");
+        }
+
+        [HttpPost]
+        public string UpdateCartQty(int id, int qty)
+        {
+            var obj = dc.tblcarts.Find(id);
+            obj.qty = qty;
+
+            dc.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+            dc.SaveChanges();
+            return "Cart Qty updated.";
         }
     }
 }

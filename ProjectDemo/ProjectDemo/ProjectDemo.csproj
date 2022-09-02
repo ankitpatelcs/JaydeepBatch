@@ -410,6 +410,8 @@
     <Content Include="Images\Products\s21.jpg" />
     <Content Include="Images\Products\tab_a7.png" />
     <Content Include="Images\Products\xps13.jpg" />
+    <Content Include="NumericTextBoxStyle\JavaScript.js" />
+    <Content Include="NumericTextBoxStyle\StyleSheet1.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -448,6 +450,7 @@
     <Content Include="Areas\Users\Views\Default\Register.cshtml" />
     <Content Include="Areas\Users\Views\Default\Products.cshtml" />
     <Content Include="Areas\Users\Views\Default\Single.cshtml" />
+    <Content Include="Areas\Users\Views\Default\Cart.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
