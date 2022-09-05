@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ProjectDemo.EDM;
+using ProjectDemo.Models;
 
 namespace ProjectDemo.Areas.Users.Controllers
 {
@@ -87,7 +88,7 @@ namespace ProjectDemo.Areas.Users.Controllers
         public ActionResult Cart()
         {
             int userid = Convert.ToInt32(Session["UserId"].ToString());
-            return View(dc.tblcarts.Where(c=>c.user_id==userid).ToList());
+            return View(dc.tblcarts.Where(c => c.user_id == userid).ToList());
         }
         public ActionResult Delete(int id)
         {
@@ -105,6 +106,37 @@ namespace ProjectDemo.Areas.Users.Controllers
             dc.Entry(obj).State = System.Data.Entity.EntityState.Modified;
             dc.SaveChanges();
             return "Cart Qty updated.";
+        }
+
+        public ActionResult Checkout()
+        {
+            int userid = Convert.ToInt32(Session["UserId"].ToString());
+            tblorder obj = new tblorder();
+            obj.user_id = userid;
+            obj.orderdate = DateTime.Now;
+            obj.status = (byte)OrderStatusEnum.Confirmed;
+            dc.tblorders.Add(obj);
+            dc.SaveChanges();
+
+            tblorderdetail objorderdetail = new tblorderdetail();
+            var cartitems = dc.tblcarts.Where(c => c.user_id == userid).ToList();
+            foreach (var item in cartitems)
+            {
+                objorderdetail.order_id = obj.order_id;
+                objorderdetail.product_id = item.product_id;
+                objorderdetail.qty = item.qty;
+
+                dc.tblorderdetails.Add(objorderdetail);
+                dc.SaveChanges();
+            }
+            dc.tblcarts.RemoveRange(dc.tblcarts.Where(c => c.user_id == userid));
+            dc.SaveChanges();
+            return RedirectToAction("Success");
+        }
+
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }
