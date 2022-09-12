@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using ProjectDemo.EDM;
@@ -137,6 +139,78 @@ namespace ProjectDemo.Areas.Users.Controllers
         public ActionResult Success()
         {
             return View();
+        }
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ForgotPassword(FormCollection fc)
+        {
+            string email = fc["email"];
+            Session["emailotp"] = email;
+            var obj = dc.tblUsers.Where(u=>u.email==email).FirstOrDefault();
+            if (obj!=null)
+            {
+                Random r = new Random();
+                int otp=r.Next(1000,9999);
+                Session["otp"] = otp;
+                SendEmail(email, "Reset password OTP", $"Reset password OTP: {otp}");
+                return RedirectToAction("ValidateOTP");
+            }
+            ViewBag.error = "User Not Found.!";
+            return View();
+        }
+        public ActionResult ValidateOTP()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ValidateOTP( FormCollection fc)
+        {
+            string otp = fc["textotp"];
+            
+            if (otp==Session["otp"].ToString())
+            {
+                return RedirectToAction("ResetPassword");
+            }
+            ViewBag.error = "OTP did mot match.!";
+            return View();
+        }
+
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ResetPassword(FormCollection fc)
+        {
+            string emailotp = Session["emailotp"].ToString();
+            var obj = dc.tblUsers.Where(u => u.email == emailotp).FirstOrDefault();
+            obj.password = fc["pass"];
+            dc.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+            dc.SaveChanges();
+            
+            return RedirectToAction("Login");
+        }
+
+        public static void SendEmail(string toEmail, string subject, string msgBody)
+        {
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("edemo5866@gmail.com");
+                mail.To.Add(toEmail);
+                mail.Subject = subject;
+                mail.Body = msgBody;
+                mail.IsBodyHtml = true;
+                //mail.Attachments.Add(new Attachment("D:\\TestFile.txt"));//--Uncomment this to send any attachment  
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("edemo5866@gmail.com", "xjrtrnksiiedohpp");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                }
+            }
         }
     }
 }

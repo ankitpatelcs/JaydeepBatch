@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "ValidateOTP";
+    Layout = "~/Areas/Users/Views/Shared/User_Layout.cshtml";
+}
+
+<div class="products">
+    <div class="container">
+        <h2>Validate OTP</h2>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="login-form-grids animated wow slideInUp">
+                <span class="text-danger">@ViewBag.error</span>
+                @using (Html.BeginForm())
+                {
+                    <input type="text" name="textotp" placeholder="Enter OTP" required=" ">
+
+                    <input type="submit" value="Submit">
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
