@@ -17,7 +17,8 @@ namespace ADOCrud.Services
         }
         public List<tblemployee> GetEmployees()
         {
-            SqlDataAdapter da = new SqlDataAdapter("select * from tblemployee", cn);
+            //SqlDataAdapter da = new SqlDataAdapter("select * from tblemployee", cn);
+            SqlDataAdapter da = new SqlDataAdapter("exec GetAllEmployees 0,0", cn);
             DataTable dt = new DataTable();
             da.Fill(dt);
 
@@ -41,7 +42,8 @@ namespace ADOCrud.Services
 
         public tblemployee GetEmployeeById(int id)
         {
-            SqlDataAdapter da = new SqlDataAdapter("select * from tblemployee where emp_id=" + id, cn);
+            //SqlDataAdapter da = new SqlDataAdapter("select * from tblemployee where emp_id=" + id, cn);
+            SqlDataAdapter da = new SqlDataAdapter($"exec GetAllEmployees {id},1" + id, cn);
             DataTable dt = new DataTable();
             da.Fill(dt);
 
@@ -59,7 +61,45 @@ namespace ADOCrud.Services
             }
             return li;
         }
+        public void AddEmployee(tblemployee obj)
+        {
+            SqlCommand cmd = new SqlCommand("insert into tblemployee (f_name,salary,email,mobile,password,address,gender) values(@fn,@sl,@em,@mb,@ps,@ad,@gn)",cn);
+            cmd.Parameters.AddWithValue("@fn",obj.f_name);
+            cmd.Parameters.AddWithValue("@sl",obj.salary);
+            cmd.Parameters.AddWithValue("@em",obj.email);
+            cmd.Parameters.AddWithValue("@mb",obj.mobile);
+            cmd.Parameters.AddWithValue("@ps",obj.password);
+            cmd.Parameters.AddWithValue("@ad",obj.address);
+            cmd.Parameters.AddWithValue("@gn",obj.gender);
+            cn.Open();
+            cmd.ExecuteNonQuery();
+            cn.Close();
+        }
 
+        public void UpdateEmployee(tblemployee obj)
+        {
+            SqlCommand cmd = new SqlCommand("update tblemployee set f_name=@fn,salary=@sl,email=@em,mobile=@mb,password=@ps,address=@ad,gender=@gn where emp_id=@id", cn);
+            cmd.Parameters.AddWithValue("@fn", obj.f_name);
+            cmd.Parameters.AddWithValue("@sl", obj.salary);
+            cmd.Parameters.AddWithValue("@id", obj.emp_id);
+            cmd.Parameters.AddWithValue("@em", obj.email);
+            cmd.Parameters.AddWithValue("@mb", obj.mobile);
+            cmd.Parameters.AddWithValue("@ps", obj.password);
+            cmd.Parameters.AddWithValue("@ad", obj.address);
+            cmd.Parameters.AddWithValue("@gn", obj.gender);
+            cn.Open();
+            cmd.ExecuteNonQuery();
+            cn.Close();
+        }
+        
+        public void DeleteEmployee(int id)
+        {
+            SqlCommand cmd = new SqlCommand("delete from tblemployee where emp_id=@id", cn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cn.Open();
+            cmd.ExecuteNonQuery();
+            cn.Close();
+        }
 
     }
 }

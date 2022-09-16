@@ -11,6 +11,9 @@ namespace ADOCrud.Services
     {
         List<tblemployee> GetEmployees();
         tblemployee GetEmployeeById(int id);
+        void AddEmployee(tblemployee obj);
+        void UpdateEmployee(tblemployee obj);
+        void DeleteEmployee(int id);
 
     }
 }
