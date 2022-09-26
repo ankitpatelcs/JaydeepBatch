@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "https://restcountries.com/v3.1/all",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (key, item) {
+                    $("#tbl").append("<tr>"
+                        + "<td>" + item.name.common+"</td>"
+                        + "<td>" + item.capital+"</td>"
+                        + "<td>" + item.population+"</td>"
+                        + "<td>" + item.latlng+"</td>"
+                        + "<td>" + item.timezones+"</td>"
+                        + "<td><img src='"+item.flags.svg+"' height=50 width=80 /></td>"
+                        + "</tr>");
+                });
+            }
+
+        });
+    });
+</script>
+
+<h2>Index</h2>
+
+<table class="table" id="tbl">
+    <tr>
+        <th>Name</th>
+        <th>Capital</th>
+        <th>Population</th>
+        <th>Location</th>
+        <th>Timezone</th>
+        <th>Flag</th>
+    </tr>
+</table>
