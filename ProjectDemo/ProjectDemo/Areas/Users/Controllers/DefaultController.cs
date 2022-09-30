@@ -212,5 +212,10 @@ namespace ProjectDemo.Areas.Users.Controllers
                 }
             }
         }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

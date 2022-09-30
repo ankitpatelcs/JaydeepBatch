@@ -456,6 +456,7 @@
     <Content Include="Areas\Users\Views\Default\ForgotPassword.cshtml" />
     <Content Include="Areas\Users\Views\Default\ValidateOTP.cshtml" />
     <Content Include="Areas\Users\Views\Default\ResetPassword.cshtml" />
+    <Content Include="Areas\Users\Views\Default\Contact.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
